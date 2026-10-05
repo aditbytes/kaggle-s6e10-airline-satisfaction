@@ -33,9 +33,13 @@ Full report: [reports/eda.md](reports/eda.md) (regenerate with `python src/eda.p
 ## Notebook
 
 [`notebooks/s6e10_eda_lgbm_baseline.ipynb`](notebooks/s6e10_eda_lgbm_baseline.ipynb) is a self-contained, beginner-friendly walkthrough:
-EDA charts → the same stratified 5-fold CV → LightGBM with exp003 settings (reproduces OOF AUC 0.958981) →
-feature importance → a validated `submission.csv` → what I tried and what's next.
-It doesn't import `src/`, finds the data both locally (`../data`) and on Kaggle (`/kaggle/input/...`), and runs in about 2.4 min on a laptop.
+EDA charts → the same stratified 5-fold CV → LightGBM → feature importance → a validated `submission.csv` → what I tried and what's next.
+It doesn't import `src/` and finds the data both locally (`../data`) and on Kaggle (`/kaggle/input/...`).
+
+| Mode | Settings | OOF AUC | Kaggle CPU time |
+|---|---|---|---|
+| default | lr 0.05, early-stopping patience 100 | 0.958829 | ≈ 3 min |
+| `FULL_EXP003 = True` | exp003: lr 0.02, patience 200 | 0.958981 | 7.6 min (measured) |
 
 ## How to run
 
