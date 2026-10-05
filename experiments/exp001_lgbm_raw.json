@@ -1,0 +1,61 @@
+{
+  "experiment": "exp001_lgbm_raw",
+  "model": "LightGBM",
+  "features": "raw",
+  "n_features": 21,
+  "oof_auc": 0.958876,
+  "fold_auc": [
+    0.959091,
+    0.957728,
+    0.95951,
+    0.958907,
+    0.959194
+  ],
+  "fold_auc_std": 0.000611,
+  "best_iterations": [
+    606,
+    605,
+    528,
+    491,
+    379
+  ],
+  "params": {
+    "objective": "binary",
+    "learning_rate": 0.05,
+    "n_estimators": 10000,
+    "num_leaves": 63,
+    "min_child_samples": 50,
+    "subsample": 0.8,
+    "subsample_freq": 1,
+    "colsample_bytree": 0.8,
+    "reg_lambda": 1.0,
+    "random_state": 42,
+    "n_jobs": -1,
+    "verbose": -1
+  },
+  "feature_importance_gain": {
+    "Online boarding": 0.4514,
+    "Inflight wifi service": 0.132,
+    "Type of Travel": 0.1043,
+    "Class": 0.081,
+    "Inflight entertainment": 0.0495,
+    "Customer Type": 0.0263,
+    "Checkin service": 0.0213,
+    "Seat comfort": 0.0181,
+    "Baggage handling": 0.017,
+    "Ease of Online booking": 0.0155,
+    "On-board service": 0.0155,
+    "Age": 0.0148,
+    "Flight Distance": 0.0127,
+    "Cleanliness": 0.0101,
+    "Leg room service": 0.01,
+    "Gate location": 0.0091,
+    "Departure/Arrival time convenient": 0.0055,
+    "Food and drink": 0.0023,
+    "Arrival Delay in Minutes": 0.0019,
+    "Departure Delay in Minutes": 0.001,
+    "Gender": 0.0006
+  },
+  "minutes": 1.1,
+  "finished": "2026-10-05 07:16 UTC"
+}
