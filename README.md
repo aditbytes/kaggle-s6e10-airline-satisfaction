@@ -7,6 +7,6 @@ predict whether an airline passenger was **satisfied**, from their trip details 
 |---|---|
 | **Task** | Binary classification (`satisfaction`: True / False) |
 | **Metric** | ROC AUC on the predicted probability |
-| **Data** | 699,635 train rows · 299,844 test rows · 22 features |
+| **Data** | 699,635 train rows · 299,844 test rows · 21 features |
 | **Timeline** | 1 Oct 2026 → 31 Oct 2026 (23:59 UTC) |
 | **Limits** | 10 submissions/day · teams up to 3 |
