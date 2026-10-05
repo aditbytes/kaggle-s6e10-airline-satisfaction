@@ -11,6 +11,14 @@ predict whether an airline passenger was **satisfied**, from their trip details 
 | **Timeline** | 1 Oct 2026 → 31 Oct 2026 (23:59 UTC) |
 | **Limits** | 10 submissions/day · teams up to 3 |
 
+## Pipeline
+
+![Pipeline](docs/pipeline.png)
+
+Editable source: [docs/pipeline.drawio](docs/pipeline.drawio) (open in [draw.io](https://app.diagrams.net) or the desktop app).
+It has two pages: **Pipeline** (above) and **Code map** ([PNG](docs/code-map.png)).
+The diagram is generated from `experiments/*.json`, so after new experiments run `python docs/build_diagram.py` to refresh the scores.
+
 ## Key findings from EDA
 
 Full report: [reports/eda.md](reports/eda.md) (regenerate with `python src/eda.py`).
