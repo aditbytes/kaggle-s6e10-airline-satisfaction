@@ -1,0 +1,296 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="pipeline" name="Pipeline">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="txt1" value="&lt;b&gt;Predicting Airline Satisfaction · Kaggle Playground S6E10&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=22;" vertex="1" parent="1">
+          <mxGeometry x="20" y="16" width="1200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="txt2" value="Binary classification · metric ROC AUC · 699,635 train / 299,844 test rows · deadline 31 Oct 2026" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=13;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="20" y="48" width="1200" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="lane3" value="1 · Data" style="swimlane;rounded=1;html=1;startSize=34;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;swimlaneFillColor=#ffffff;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="20" y="90" width="260" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="box4" value="&lt;b&gt;Kaggle CLI&lt;/b&gt;&lt;br&gt;&lt;font face='Courier New'&gt;make data&lt;/font&gt;&lt;br&gt;kaggle competitions download&lt;br&gt;playground-series-s6e10" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="lane3">
+          <mxGeometry x="10" y="46" width="240" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="box5" value="&lt;b&gt;train.csv&lt;/b&gt;&lt;br&gt;699,635 rows × 23 cols&lt;br&gt;id · 21 features · &lt;i&gt;satisfaction&lt;/i&gt;&lt;br&gt;44.36% satisfied" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="lane3">
+          <mxGeometry x="10" y="144" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="box6" value="&lt;b&gt;test.csv&lt;/b&gt;&lt;br&gt;299,844 rows × 22 cols&lt;br&gt;(no target)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="lane3">
+          <mxGeometry x="10" y="244" width="240" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="box7" value="&lt;b&gt;sample_submission.csv&lt;/b&gt;&lt;br&gt;id, satisfaction (probability)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="lane3">
+          <mxGeometry x="10" y="326" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="box8" value="&lt;i&gt;data/ is git-ignored: Kaggle rules forbid redistributing competition data.&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="lane3">
+          <mxGeometry x="10" y="396" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="edge9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=0;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="box4" target="box5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=0;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="box4" target="box6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=0;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="box4" target="box7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lane12" value="2 · Load &amp; EDA" style="swimlane;rounded=1;html=1;startSize=34;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=14;swimlaneFillColor=#ffffff;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="314" y="90" width="260" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="box13" value="&lt;b&gt;src/data.py&lt;/b&gt;&lt;br&gt;• categoricals → &lt;i&gt;category&lt;/i&gt; dtype&lt;br&gt;• target True/False → 1/0&lt;br&gt;• id becomes the index" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane12">
+          <mxGeometry x="10" y="46" width="240" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="box14" value="&lt;b&gt;src/eda.py&lt;/b&gt; → reports/eda.md" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane12">
+          <mxGeometry x="10" y="150" width="240" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="box15" value="&lt;b&gt;Key findings&lt;/b&gt;&lt;br&gt;• Online boarding alone: AUC 0.84&lt;br&gt;• Class: Business 72.5% satisfied vs Eco 16.8%&lt;br&gt;• Personal travel: only 9.7% satisfied&lt;br&gt;• Customer Type: loyal 49.5% vs disloyal 20.1%&lt;br&gt;• NaN only in Arrival Delay (292 train / 130 test)&lt;br&gt;• No train/test drift (all means within 2%)&lt;br&gt;• Delays, Gender, Gate location ≈ no signal alone" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="lane12">
+          <mxGeometry x="10" y="204" width="240" height="232" as="geometry" />
+        </mxCell>
+        <mxCell id="edge16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.35;" edge="1" parent="1" source="box5" target="box13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.75;" edge="1" parent="1" source="box6" target="box13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="box13" target="box14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lane19" value="3 · Features" style="swimlane;rounded=1;html=1;startSize=34;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=14;swimlaneFillColor=#ffffff;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="608" y="90" width="260" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="box20" value="&lt;b&gt;raw · 21 features&lt;/b&gt;&lt;br&gt;• Age, Flight Distance&lt;br&gt;• Departure / Arrival delay (min)&lt;br&gt;• 13 service ratings (0–5)&lt;br&gt;• Gender, Customer Type,&lt;br&gt;&amp;nbsp;&amp;nbsp;Type of Travel, Class" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane19">
+          <mxGeometry x="10" y="46" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="box21" value="&lt;b&gt;fe · 34 features&lt;/b&gt; = raw +&lt;br&gt;• svc_mean / min / max / std&lt;br&gt;• svc_n5, svc_n0, svc_low&lt;br&gt;• boarding_x_wifi&lt;br&gt;• delay_total, delay_recovered,&lt;br&gt;&amp;nbsp;&amp;nbsp;delay_per_1000km&lt;br&gt;• class_x_travel, customer_x_travel" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="lane19">
+          <mxGeometry x="10" y="196" width="240" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="box22" value="&lt;b&gt;src/features.py&lt;/b&gt;&lt;br&gt;choose with &lt;font face='Courier New'&gt;--features raw|fe&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="lane19">
+          <mxGeometry x="10" y="366" width="240" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="edge23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="box13" target="box20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge24" value="+13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="box20" target="box21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lane25" value="4 · Validation" style="swimlane;rounded=1;html=1;startSize=34;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=14;swimlaneFillColor=#ffffff;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="902" y="90" width="260" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="box26" value="&lt;b&gt;StratifiedKFold&lt;/b&gt; (src/cv.py)&lt;br&gt;5 folds · shuffle · seed 42&lt;br&gt;same folds for every experiment&lt;br&gt;139,927 rows per fold&lt;br&gt;44.36% satisfied in every fold" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="lane25">
+          <mxGeometry x="10" y="46" width="240" height="112" as="geometry" />
+        </mxCell>
+        <mxCell id="box27" value="&lt;b&gt;For each fold k&lt;/b&gt;&lt;br&gt;1. train on the other 4 folds&lt;br&gt;2. early-stop on fold k (200 rounds)&lt;br&gt;3. predict fold k → OOF&lt;br&gt;4. predict test → average of 5" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="lane25">
+          <mxGeometry x="10" y="198" width="240" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="box28" value="&lt;b&gt;CV score&lt;/b&gt; = ROC AUC of OOF&lt;br&gt;predictions on all 699,635 rows" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="lane25">
+          <mxGeometry x="10" y="322" width="240" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="edge29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.3;" edge="1" parent="1" source="box20" target="box27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge30" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.7;" edge="1" parent="1" source="box21" target="box27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="box26" target="box27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lane32" value="5 · Models" style="swimlane;rounded=1;html=1;startSize=34;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=14;swimlaneFillColor=#ffffff;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1196" y="90" width="260" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="box33" value="&lt;b&gt;exp001_lgbm_raw&lt;/b&gt;&lt;br&gt;LightGBM · raw (21)&lt;br&gt;lr 0.05 · ~522 trees/fold&lt;br&gt;&lt;b&gt;OOF AUC 0.958876&lt;/b&gt; ± 0.00061" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="lane32">
+          <mxGeometry x="10" y="46" width="240" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="edge34" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="box27" target="box33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="box35" value="&lt;b&gt;exp002_lgbm_fe&lt;/b&gt;&lt;br&gt;LightGBM · fe (34)&lt;br&gt;lr 0.05 · ~443 trees/fold&lt;br&gt;&lt;b&gt;OOF AUC 0.958664&lt;/b&gt; ± 0.00049" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="lane32">
+          <mxGeometry x="10" y="132" width="240" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="edge36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="box27" target="box35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="box37" value="&lt;b&gt;exp003_lgbm_raw_lr02&lt;/b&gt; ★&lt;br&gt;LightGBM · raw (21)&lt;br&gt;lr 0.02 · ~1,239 trees/fold&lt;br&gt;&lt;b&gt;OOF AUC 0.958981&lt;/b&gt; ± 0.00063" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="lane32">
+          <mxGeometry x="10" y="218" width="240" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="edge38" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="box27" target="box37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="box39" value="&lt;b&gt;LightGBM params&lt;/b&gt; (src/models.py)&lt;br&gt;num_leaves 63 · min_child 50&lt;br&gt;subsample 0.8 · colsample 0.8&lt;br&gt;reg_lambda 1.0 · early stop 200" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="lane32">
+          <mxGeometry x="10" y="304" width="240" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="box40" value="&lt;b&gt;Top gain (exp001_lgbm_raw)&lt;/b&gt;&lt;br&gt;Online boarding: 45%&lt;br&gt;Inflight wifi service: 13%&lt;br&gt;Type of Travel: 10%&lt;br&gt;Class: 8%&lt;br&gt;Inflight entertainment: 5%" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="lane32">
+          <mxGeometry x="10" y="392" width="240" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="lane41" value="6 · Blend &amp; submit" style="swimlane;rounded=1;html=1;startSize=34;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=14;swimlaneFillColor=#ffffff;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1490" y="90" width="260" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="box42" value="&lt;b&gt;Rank-average blend&lt;/b&gt;&lt;br&gt;exp001 + exp002 + exp003&lt;br&gt;&lt;b&gt;OOF AUC 0.959047&lt;/b&gt;&lt;br&gt;&lt;i&gt;AUC only cares about order → average ranks&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="lane41">
+          <mxGeometry x="10" y="46" width="240" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="edge43" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="box33" target="box42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge44" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="box35" target="box42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge45" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="box37" target="box42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="box46" value="&lt;b&gt;src/submit.py checks&lt;/b&gt;&lt;br&gt;• same rows &amp; id order as&lt;br&gt;&amp;nbsp;&amp;nbsp;sample_submission.csv&lt;br&gt;• ids unique · preds in [0, 1]" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="lane41">
+          <mxGeometry x="10" y="150" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="box47" value="&lt;b&gt;submissions/&amp;lt;name&amp;gt;.csv&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="lane41">
+          <mxGeometry x="10" y="250" width="240" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="box48" value="&lt;b&gt;kag submit … --cv&lt;/b&gt;&lt;br&gt;→ Kaggle public leaderboard&lt;br&gt;(10 submissions / day)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="lane41">
+          <mxGeometry x="10" y="304" width="240" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="box49" value="&lt;b&gt;kag sync&lt;/b&gt;&lt;br&gt;CV vs LB correlation:&lt;br&gt;trust CV if they agree" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="lane41">
+          <mxGeometry x="10" y="386" width="240" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="edge50" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="box42" target="box46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge51" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="box46" target="box47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge52" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="box47" target="box48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge53" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="box48" target="box49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge54" value="next idea: new features / models" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=1;" edge="1" parent="1" source="box49" target="lane19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1620.0" y="668" />
+              <mxPoint x="738.0" y="668" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="txt55" value="&lt;b&gt;Legend&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="20" y="700" width="100" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="box56" value="Data" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;verticalAlign=middle;spacingLeft=0;" vertex="1" parent="1">
+          <mxGeometry x="20" y="728" width="118" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="box57" value="Load &amp; EDA" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;align=center;verticalAlign=middle;spacingLeft=0;" vertex="1" parent="1">
+          <mxGeometry x="150" y="728" width="118" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="box58" value="Features" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;align=center;verticalAlign=middle;spacingLeft=0;" vertex="1" parent="1">
+          <mxGeometry x="280" y="728" width="118" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="box59" value="Validation" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;align=center;verticalAlign=middle;spacingLeft=0;" vertex="1" parent="1">
+          <mxGeometry x="410" y="728" width="118" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="box60" value="Models" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;align=center;verticalAlign=middle;spacingLeft=0;" vertex="1" parent="1">
+          <mxGeometry x="540" y="728" width="118" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="box61" value="Blend &amp; submit" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;align=center;verticalAlign=middle;spacingLeft=0;" vertex="1" parent="1">
+          <mxGeometry x="670" y="728" width="118" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="txt62" value="solid arrow = data flow · dashed = check / feedback loop · ★ = best single model" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="820" y="732" width="600" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="txt63" value="&lt;i&gt;Generated by docs/build_diagram.py from experiments/*.json. Re-run it after new experiments.&lt;/i&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;fontColor=#777777;" vertex="1" parent="1">
+          <mxGeometry x="20" y="772" width="900" height="22" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="code-map" name="Code map">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="txt1" value="&lt;b&gt;Code map&lt;/b&gt;: which file does what, and who imports whom" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=22;" vertex="1" parent="1">
+          <mxGeometry x="20" y="16" width="1000" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="txt2" value="solid arrow = imports / uses · dashed arrow = imports config.py, runs, or reads experiments/*.json" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=12;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="20" y="48" width="1000" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="box3" value="&lt;b&gt;src/config.py&lt;/b&gt;&lt;br&gt;paths (data/, outputs/, experiments/, submissions/)&lt;br&gt;ID, TARGET, SEED = 42, N_FOLDS = 5&lt;br&gt;column groups: NUMERIC, SERVICE_RATINGS, CATEGORICAL" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="560" y="80" width="420" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="box4" value="&lt;b&gt;src/data.py&lt;/b&gt;&lt;br&gt;load_train() · load_test()&lt;br&gt;load_sample_submission()" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="box5" value="&lt;b&gt;src/features.py&lt;/b&gt;&lt;br&gt;raw(df) · fe(df)&lt;br&gt;build(name, df)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="380" y="240" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="box6" value="&lt;b&gt;src/cv.py&lt;/b&gt;&lt;br&gt;make_folds(y) → fold id per row" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="720" y="240" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="box7" value="&lt;b&gt;src/models.py&lt;/b&gt;&lt;br&gt;LGBM_PARAMS&lt;br&gt;EARLY_STOPPING_ROUNDS" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="240" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="edge8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;dashed=1;exitX=0.5;exitY=0;entryX=0;entryY=0.5;" edge="1" parent="1" source="box4" target="box3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;dashed=1;exitX=0.5;exitY=0;entryX=0.095;entryY=1;" edge="1" parent="1" source="box5" target="box3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;dashed=1;exitX=0.5;exitY=0;entryX=0.738;entryY=1;" edge="1" parent="1" source="box6" target="box3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;dashed=1;exitX=0.5;exitY=0;entryX=1;entryY=0.5;" edge="1" parent="1" source="box7" target="box3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="box12" value="&lt;b&gt;src/eda.py&lt;/b&gt;&lt;br&gt;single-feature AUC, segments,&lt;br&gt;drift → &lt;b&gt;reports/eda.md&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="300" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="box13" value="&lt;b&gt;src/train.py&lt;/b&gt;&amp;nbsp;&amp;nbsp;&lt;font face='Courier New'&gt;--exp --features --lr --quick&lt;/font&gt;&lt;br&gt;5-fold LightGBM with early stopping → OOF ROC AUC&lt;br&gt;writes &lt;b&gt;outputs/&amp;lt;exp&amp;gt;/oof.npy, test.npy&lt;/b&gt; (git-ignored)&lt;br&gt;and &lt;b&gt;experiments/&amp;lt;exp&amp;gt;.json&lt;/b&gt; (scores, params, feature importance)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="380" y="400" width="640" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="box14" value="&lt;b&gt;src/submit.py&lt;/b&gt;&amp;nbsp;&amp;nbsp;&lt;font face='Courier New'&gt;exp [exp …] --name&lt;/font&gt;&lt;br&gt;rank-blend · uses data.py to check ids/order&lt;br&gt;writes &lt;b&gt;submissions/&amp;lt;name&amp;gt;.csv&lt;/b&gt;&lt;br&gt;and experiments/blend_*.json" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="400" width="300" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="edge15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="box4" target="box12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=0.85;exitY=1;entryX=0.06;entryY=0;" edge="1" parent="1" source="box4" target="box13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=0.5;exitY=1;entryX=0.234;entryY=0;" edge="1" parent="1" source="box5" target="box13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=0.5;exitY=1;entryX=0.766;entryY=0;" edge="1" parent="1" source="box6" target="box13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=0.15;exitY=1;entryX=0.95;entryY=0;" edge="1" parent="1" source="box7" target="box13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge20" value="outputs/*.npy" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="box13" target="box14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="box21" value="&lt;b&gt;Makefile&lt;/b&gt;&lt;br&gt;make setup · data · eda · smoke · train · submit" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="580" width="300" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="box22" value="&lt;b&gt;docs/build_diagram.py&lt;/b&gt;&lt;br&gt;reads experiments/*.json&lt;br&gt;→ &lt;b&gt;docs/pipeline.drawio&lt;/b&gt; (this file)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="580" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="edge23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;dashed=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="box21" target="box12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;dashed=1;exitX=1;exitY=0.5;entryX=0.1;entryY=1;" edge="1" parent="1" source="box21" target="box13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge25" value="experiments/*.json" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="box14" target="box22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge26" value="experiments/*.json" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeWidth=1.5;fontSize=10;dashed=1;exitX=0.9;exitY=1;entryX=0;entryY=0.5;" edge="1" parent="1" source="box13" target="box22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="box27" value="&lt;b&gt;Git-ignored&lt;/b&gt; (local only)&lt;br&gt;data/ · outputs/ · submissions/ · .venv/" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="40" y="700" width="420" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="box28" value="&lt;b&gt;Tracked&lt;/b&gt;&lt;br&gt;src/ · docs/ · reports/ · experiments/ · README.md · Makefile" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;arcSize=6;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="500" y="700" width="520" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
