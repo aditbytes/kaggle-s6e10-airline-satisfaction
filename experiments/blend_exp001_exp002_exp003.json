@@ -1,0 +1,10 @@
+{
+  "experiment": "blend_exp001_exp002_exp003",
+  "model": "rank-average blend",
+  "members": [
+    "exp001_lgbm_raw",
+    "exp002_lgbm_fe",
+    "exp003_lgbm_raw_lr02"
+  ],
+  "oof_auc": 0.959047
+}
