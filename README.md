@@ -51,8 +51,11 @@ CV = out-of-fold ROC AUC over the same stratified 5 folds. LB = public leaderboa
 
 | Exp | Model | Features | CV (OOF AUC) | Fold std | LB | Notes |
 |---|---|---|---|---|---|---|
-| [exp001](experiments/exp001_lgbm_raw.json) | LightGBM | raw (21) | **0.958876** | 0.00061 | – | Baseline, lr 0.05, ~520 trees/fold, 1.1 min |
+| [exp001](experiments/exp001_lgbm_raw.json) | LightGBM | raw (21) | 0.958876 | 0.00061 | – | Baseline, lr 0.05, ~520 trees/fold, 1.1 min |
 | [exp002](experiments/exp002_lgbm_fe.json) | LightGBM | fe (34) | 0.958664 | 0.00049 | – | Rating stats, delays, segment crosses: **worse** by 0.0002 |
-| blend 001+002 | rank average | – | **0.958978** | – | – | Diversity helps: +0.0001 over exp001 |
+| blend 001+002 | rank average | – | 0.958978 | – | – | Diversity helps: +0.0001 over exp001 |
+| [exp003](experiments/exp003_lgbm_raw_lr02.json) | LightGBM | raw (21) | 0.958981 | 0.00063 | – | lr 0.02, ~1,240 trees/fold, 2.4 min: best single model |
+| blend 003+002 | rank average | – | 0.959000 | – | – | |
+| **blend 001+002+003** | rank average | – | **0.959047** | – | – | Best so far → `submissions/blend_exp001_exp002_exp003.csv` |
 
 Top features by gain (exp001): `Online boarding` 45%, `Inflight wifi service` 13%, `Type of Travel` 10%, `Class` 8%, `Inflight entertainment` 5%.
