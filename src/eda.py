@@ -2,6 +2,7 @@
 
 Usage: python src/eda.py
 """
+import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
 
@@ -11,10 +12,12 @@ from data import load_test, load_train
 
 def md_table(df: pd.DataFrame, floatfmt: str = "{:.4f}") -> str:
     def fmt(v):
+        if isinstance(v, (int, np.integer)):
+            return f"{v:,}"
         return floatfmt.format(v) if isinstance(v, float) else str(v)
     cols = [df.index.name or ""] + [str(c) for c in df.columns]
     lines = ["| " + " | ".join(cols) + " |", "|" + "---|" * len(cols)]
-    for idx, row in df.iterrows():
+    for idx, *row in df.itertuples(name=None):  # itertuples keeps per-column dtypes
         lines.append("| " + " | ".join([str(idx)] + [fmt(v) for v in row]) + " |")
     return "\n".join(lines)
 
