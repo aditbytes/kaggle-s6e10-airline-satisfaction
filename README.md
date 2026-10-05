@@ -30,6 +30,13 @@ Full report: [reports/eda.md](reports/eda.md) (regenerate with `python src/eda.p
 - **Missing values** only in `Arrival Delay in Minutes` (292 train / 130 test); LightGBM handles NaN natively.
 - **No train/test drift**: every feature mean differs by under 2%, so local CV should track the leaderboard.
 
+## Notebook
+
+[`notebooks/s6e10_eda_lgbm_baseline.ipynb`](notebooks/s6e10_eda_lgbm_baseline.ipynb) is a self-contained, beginner-friendly walkthrough:
+EDA charts → the same stratified 5-fold CV → LightGBM with exp003 settings (reproduces OOF AUC 0.958981) →
+feature importance → a validated `submission.csv` → what I tried and what's next.
+It doesn't import `src/`, finds the data both locally (`../data`) and on Kaggle (`/kaggle/input/...`), and runs in about 2.4 min on a laptop.
+
 ## How to run
 
 ```bash
