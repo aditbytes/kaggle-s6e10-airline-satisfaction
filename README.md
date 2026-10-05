@@ -38,7 +38,7 @@ It doesn't import `src/` and finds the data both locally (`../data`) and on Kagg
 
 | Mode | Settings | OOF AUC | Kaggle CPU time |
 |---|---|---|---|
-| default | lr 0.05, early-stopping patience 100 | 0.958829 | ≈ 3 min |
+| default | lr 0.05, early-stopping patience 100 | 0.958829 | 1.7 min (measured) |
 | `FULL_EXP003 = True` | exp003: lr 0.02, patience 200 | 0.958981 | 7.6 min (measured) |
 
 ## How to run
