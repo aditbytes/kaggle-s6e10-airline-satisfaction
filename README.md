@@ -75,6 +75,8 @@ CV = out-of-fold ROC AUC over the same stratified 5 folds. LB = public leaderboa
 | blend 001+002 | rank average | – | 0.958978 | – | – | Diversity helps: +0.0001 over exp001 |
 | [exp003](experiments/exp003_lgbm_raw_lr02.json) | LightGBM | raw (21) | 0.958981 | 0.00063 | – | lr 0.02, ~1,240 trees/fold, 2.4 min: best single model |
 | blend 003+002 | rank average | – | 0.959000 | – | – | |
-| **blend 001+002+003** | rank average | – | **0.959047** | – | – | Best so far → `submissions/blend_exp001_exp002_exp003.csv` |
+| **blend 001+002+003** | rank average | – | **0.959047** | – | **0.95850** | Best so far → `submissions/blend_exp001_exp002_exp003.csv` |
+
+**Leaderboard (5 Oct 2026):** first submission scored **0.95850** on the public LB, rank 423 of 768. CV and LB agree within 0.0006. The top 100 are at 0.96150, a gap of about 0.003 that is 20× larger than any gain from tuning so far, so the next step is a different idea (e.g. adding the original dataset), not more tuning.
 
 Top features by gain (exp001): `Online boarding` 45%, `Inflight wifi service` 13%, `Type of Travel` 10%, `Class` 8%, `Inflight entertainment` 5%.
