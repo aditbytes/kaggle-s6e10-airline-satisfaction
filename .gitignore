@@ -17,3 +17,6 @@ __pycache__/
 .DS_Store
 .vscode/
 .idea/
+
+# Notebook output (Kaggle writes it to /kaggle/working)
+notebooks/submission.csv
