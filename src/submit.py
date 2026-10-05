@@ -8,12 +8,13 @@ Usage:
   python src/submit.py exp001_lgbm_raw exp002_lgbm_fe --name blend_001_002
 """
 import argparse
+import json
 
 import numpy as np
 from scipy.stats import rankdata
 from sklearn.metrics import roc_auc_score
 
-from config import COMPETITION, ID, OUTPUT_DIR, SUBMISSION_DIR, TARGET
+from config import COMPETITION, EXPERIMENT_DIR, ID, OUTPUT_DIR, SUBMISSION_DIR, TARGET
 from data import load_sample_submission, load_test, load_train
 
 
@@ -49,6 +50,12 @@ def main():
         raise SystemExit("test rows and sample submission ids are not in the same order")
     sub[TARGET] = pred
     assert sub[ID].is_unique and sub[TARGET].between(0, 1).all()
+
+    if len(args.experiments) > 1:  # record the blend next to the single-model results
+        EXPERIMENT_DIR.mkdir(exist_ok=True)
+        (EXPERIMENT_DIR / f"{name}.json").write_text(json.dumps(
+            {"experiment": name, "model": "rank-average blend", "members": args.experiments,
+             "oof_auc": round(cv, 6)}, indent=2) + "\n")
 
     SUBMISSION_DIR.mkdir(exist_ok=True)
     path = SUBMISSION_DIR / f"{name}.csv"
