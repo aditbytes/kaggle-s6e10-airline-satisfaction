@@ -1,0 +1,15 @@
+{
+  "id": "sinhaaditya5/s6e10-airline-satisfaction-eda-lightgbm",
+  "title": "S6E10 Airline Satisfaction: EDA + LightGBM",
+  "code_file": "s6e10_eda_lgbm_baseline.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": ["playground-series-s6e10"],
+  "kernel_sources": [],
+  "model_sources": []
+}
