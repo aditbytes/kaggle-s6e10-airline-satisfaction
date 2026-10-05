@@ -44,3 +44,13 @@ make submit EXP=exp001_lgbm_raw
 | `src/train.py` | K-fold training → OOF AUC, `outputs/<exp>/`, `experiments/<exp>.json` |
 | `src/submit.py` | Builds `submissions/<exp>.csv`; rank-blends several experiments |
 | `experiments/` | One JSON per run: scores, params, feature importance (tracked in git) |
+
+## Results
+
+CV = out-of-fold ROC AUC over the same stratified 5 folds. LB = public leaderboard.
+
+| Exp | Model | Features | CV (OOF AUC) | Fold std | LB | Notes |
+|---|---|---|---|---|---|---|
+| [exp001](experiments/exp001_lgbm_raw.json) | LightGBM | raw (21) | **0.958876** | 0.00061 | – | Baseline, lr 0.05, ~520 trees/fold, 1.1 min |
+
+Top features by gain (exp001): `Online boarding` 45%, `Inflight wifi service` 13%, `Type of Travel` 10%, `Class` 8%, `Inflight entertainment` 5%.
